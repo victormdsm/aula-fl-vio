@@ -31,4 +31,25 @@ public class UsuarioService {
         return usuarioRepository.findAll();
     }
 
+    @Transactional
+    public Usuario update(Long id, Usuario atualizar) {
+
+        var user =  findById(id);
+
+        if (!atualizar.getNome().isBlank() && atualizar.getNome() != null){
+            user.setNome(atualizar.getNome());
+        }
+        if (atualizar.getIdade() != null){
+            user.setIdade(atualizar.getIdade());
+        }
+        return usuarioRepository.save(user);
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        usuarioRepository.deleteById(id);
+    }
+
+
+
 }

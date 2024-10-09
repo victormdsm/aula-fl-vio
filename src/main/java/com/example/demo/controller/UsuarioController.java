@@ -44,4 +44,23 @@ public class UsuarioController {
     }
 
 
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Usuario> update(@PathVariable Long id,@RequestBody Usuario user){
+        try {
+            var updated = usuarioService.update(id, user);
+            return new ResponseEntity<>(updated, HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> delete (@PathVariable Long id){
+        try {
+            usuarioService.delete(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
 }
